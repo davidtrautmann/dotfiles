@@ -5,8 +5,10 @@ Collection of various config files
 
 ## Install
 
-run install.sh to create symlinks in home folder.
+run install.sh to copy dotfile to home folder.
 
-## Vim
+	./install.sh
 
-run ```git submodule init && git submodule update``` before starting vim
+## Backup
+
+the current dotfiles will be copied to ```~/.dofiles/$timestamp/```.
