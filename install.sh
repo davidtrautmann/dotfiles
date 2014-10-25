@@ -6,16 +6,19 @@
 
 ########## Variables
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".gemrc .gitmodules .gvimrc .vimrc .vim .vimbackup .zlogin .zshrc .zsh"    # list of files/folders to symlink in homedir
+# dotfiles backup directory
+dir=~/.dotfiles
+# list of files/folders to symlink in homedir
+files=".gemrc .gitmodules .gvimrc .vimrc .vim .vimbackup .zlogin .zshrc .zsh"
+# Current timestamp for dotfile backup
+timestamp=$(date "+%Y%m%d-%H%M%S")
 
 ##########
 
-# create .dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-rm -rf $olddir
-mkdir -p $olddir
+# create .dotfiles folder in homedir
+echo "Creating $dir for backup of any existing dotfiles in ~"
+mkdir -p $dir
+mkdir -p $dir/$timestamp
 echo "...done"
 
 # change to the dotfiles directory
@@ -24,9 +27,9 @@ cd $dir
 echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
+echo "Backup any existing dotfiles from ~ to $dir/$timestamp"
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv -f ~/$file $olddir
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/$file
+    mv -f ~/$file $dir/$timestamp
+    echo "Copy $file to home directory."
+    cp -rf $dir/$file ~/$file
 done
