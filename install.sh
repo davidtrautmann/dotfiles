@@ -15,6 +15,9 @@ timestamp=$(date "+%Y%m%d-%H%M%S")
 
 ##########
 
+# initializing and update submodules
+git submodule init && git submodule update
+
 # create .dotfiles folder in homedir
 echo "Creating $dir for backup of any existing dotfiles in ~"
 mkdir -p $dir
